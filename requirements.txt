@@ -1,0 +1,10 @@
+torch
+albumentations
+torchvision
+face_alignment
+imageio
+scikit-image
+numpy
+moviepy
+matplotlib
+yacs
