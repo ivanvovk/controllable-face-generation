@@ -14,7 +14,7 @@ The work has been done as the Deep Learning Course final project "*Controllable 
 
 This master branch contains the solution for facial keypoints transfer (check another branches for other types of conditions and approaches) based on publicly available pretrained on CelebA128 generative model Adversarial Latent Autoencoder (ALAE, https://github.com/podgorskiy/ALAE). The solution is simple and just manipulates the latent codes of images using a small mapping MLP network. Generally, the whole pose-transfer architecture is trained adversarially with a special MLP critic network just on the latent codes of ALAE.
 
-It is worth to mention, that ALAE has a huge identity gap during real image restoration. So, if you encode the image and then decode it with the generator, than you'll get a similar high-end quality picture, but the human identity will be not the same. In order to overcome it, we parametrically finetune ALAE's generator on a new face using perceptual VGG19 loss.
+It is worth to mention, that ALAE has a huge identity gap during real image restoration. So, if you encode the image and then decode it with the generator, than you'll get a similar high-end quality picture, but the human identity will be not the same. In order to overcome it, we parametrically finetune ALAE's generator on a new face using perceptual VGG19 loss. We succeeded in minimizing the identity gap, but the model experiences problems with image restoration quality, so one thing to improve is to pay more attention for careful finetunning. During experiments we captured the dependence between the detailed (including eyes, mouth, etc.) restoration quality and the quality of keypoints transfer.
 
 ## Reproducibility
 
