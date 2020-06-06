@@ -3,6 +3,9 @@
 |![alt-text-1](demo/target.gif "Target")|![alt-text-3](demo/result_0.gif "Result")|![alt-text-5](demo/result_1.gif "Result")|
 
 # Controllable Face Generation via Conditional Adversarial Latent Autoencoder (ALAE)
+
+**Authors**: Grigorii Sotnikov, Vladimir Gogoryan, Dmitry Smorchkov and Ivan Vovk (all have equal contribution)
+
 The work has been done as the Deep Learning Course final project "Controllable Face Generation via Conditional Latent Models" at Skoltech. You can check the report and details in `demo/paper.pdf`.
 
 ## Info
