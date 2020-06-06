@@ -1,118 +1,40 @@
-# Copyright 2019-2020 Stanislav Pidhorskyi
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#  http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ==============================================================================
-
-import threading
-import hashlib
-import pickle
-import os
-
 import torch
-from torch import nn
+from torchvision.utils import save_image
 
-from configs.defaults import get_cfg_defaults
+def sample_noise(bs, code=512, device='cpu'):
+    return torch.randn(bs, code).to(device)
 
+def find_alpha(tracked, limit):
+    return min(tracked/limit, 1)
 
-def normalize(x, dim=None):
-    if not dim:
-        return (x - x.min())/(x.max() - x.min())
-    return (x - x.min(dim=dim))/(x.max(dim=dim) - x.min(dim=dim))
+def allow_gradient(module, permission=True):
+    for block in module.parameters():
+        block.requires_grad = permission
 
+def adjust_lr(optimizer, lr):
+    for group in optimizer.param_groups:
+        mult = group.get('mult', 1)
+        group['lr'] = lr * mult
+        
+def linear_scale_lr(tracked, total_items, start=5e-6, end=1.5e-4):
+    coef = tracked/total_items
+    return (1 - coef) * start + coef * end
 
-def build_configuration(config_type='celeba', configs_dir=None):
-    cfg = get_cfg_defaults()
-    filename = os.path.join('configs' if not configs_dir else configs_dir, f'{config_type}.yaml')
-    cfg.merge_from_file(filename)
-    return cfg
-
-
-class cache:
-    def __init__(self, function):
-        self.function = function
-        self.pickle_name = self.function.__name__
-
-    def __call__(self, *args, **kwargs):
-        m = hashlib.sha256()
-        m.update(pickle.dumps((self.function.__name__, args, frozenset(kwargs.items()))))
-        output_path = os.path.join('.cache', "%s_%s" % (m.hexdigest(), self.pickle_name))
-        try:
-            with open(output_path, 'rb') as f:
-                data = pickle.load(f)
-        except (FileNotFoundError, pickle.PickleError):
-            data = self.function(*args, **kwargs)
-            os.makedirs(os.path.dirname(output_path), exist_ok=True)
-            with open(output_path, 'wb') as f:
-                pickle.dump(data, f)
-        return data
-
-
-def save_model(x, name):
-    if isinstance(x, nn.DataParallel):
-        torch.save(x.module.state_dict(), name)
-    else:
-        torch.save(x.state_dict(), name)
-
-
-class AsyncCall(object):
-    def __init__(self, fnc, callback=None):
-        self.Callable = fnc
-        self.Callback = callback
-        self.result = None
-
-    def __call__(self, *args, **kwargs):
-        self.Thread = threading.Thread(target=self.run, name=self.Callable.__name__, args=args, kwargs=kwargs)
-        self.Thread.start()
-        return self
-
-    def wait(self, timeout=None):
-        self.Thread.join(timeout)
-        if self.Thread.isAlive():
-            raise TimeoutError
-        else:
-            return self.result
-
-    def run(self, *args, **kwargs):
-        self.result = self.Callable(*args, **kwargs)
-        if self.Callback:
-            self.Callback(self.result)
-
-
-class AsyncMethod(object):
-    def __init__(self, fnc, callback=None):
-        self.Callable = fnc
-        self.Callback = callback
-
-    def __call__(self, *args, **kwargs):
-        return AsyncCall(self.Callable, self.Callback)(*args, **kwargs)
-
-
-def async_func(fnc=None, callback=None):
-    if fnc is None:
-        def add_async_callback(f):
-            return AsyncMethod(f, callback)
-        return add_async_callback
-    else:
-        return AsyncMethod(fnc, callback)
-
-
-class Registry(dict):
-    def __init__(self, *args, **kwargs):
-        super(Registry, self).__init__(*args, **kwargs)
-
-    def register(self, module_name):
-        def register_fn(module):
-            assert module_name not in self
-            self[module_name] = module
-            return module
-        return register_fn
+def save_batch(name, fake, real, nrows=6):
+    fake, real = fake.split(4), real.split(2)
+    save_image(torch.cat([torch.cat([fake[i], real[i]], dim=0) for i in range(nrows)], dim=0), name, nrow=nrows, padding=1,
+               normalize=True, range=(-1, 1))
+    
+def save_reconstructions(name, original, reconstruction, nrows=6):
+    """
+    original, reconstruction - type: list, e.g. original = [x, x_hat], reconstruction = [G(E(x)), G(E(x_hat))]
+    
+    [[orig_x, rec_x], [orig_x, rec_x], [orig_x, rec_x]]
+    [[orig_x_hat, rec_x_hat], [orig_x_hat, rec_x_hat], [orig_x_hat, rec_x_hat]]
+    
+    """
+    tensor = []
+    for orig, rec in zip(original, reconstruction):        
+        tensor.append(torch.cat([torch.cat([orig.split(1)[i], rec.split(1)[i]], dim=0) for i in range(nrows//2)], dim=0))
+    
+    save_image(torch.cat(tensor, dim=0), name, nrow=nrows, padding=1, normalize=True, range=(-1, 1))

@@ -1,10 +1,5 @@
 torch
-albumentations
+tqdm
 torchvision
-face_alignment
-imageio
-scikit-image
 numpy
-moviepy
-matplotlib
-yacs
+pandas
