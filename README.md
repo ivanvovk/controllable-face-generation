@@ -16,9 +16,13 @@ It is worth to mention, that ALAE has a huge identity gap during real image rest
 
 ## Reproducibility
 
+### Inference and training
+
 First of all, make sure you have installed all the python packages by `pip install -r requirements.txt`. To try the solution we prepared `notebooks` folder, where we provided finetunning and inferene codes.
 
-## Data and trained models
+Single face finetunning is done in the notebook `notebooks/one_guy_finetunning.ipynb`. To train the facial keypoints transfer model you should set params in and run the bash file `sh train_talking_heads.sh`.
+
+### Data and trained models
 
 The whole model is trained on the single speaker (id00061) from VoxCeleb2 dataset. Dataset is available at [this](https://drive.google.com/drive/folders/1T26YUSpa1RqU9mhgQhJj9M5jA3nDfZoV?usp=sharing) link. Here you can also find the pretrained model `face_rotation_model.pt`. Put it `checkpts` folder and run notebooks.
 
