@@ -1,6 +1,8 @@
+<center>
 |   |![alt-text-2](demo/source_0.png "source")|![alt-text-4](demo/source_1.png "source")|
 |:-:|:-:|:-:|
 |![alt-text-1](demo/target.gif "target")|![alt-text-3](demo/result_0.gif "result")|![alt-text-5](demo/result_1.gif "result")|
+</center>
 
 # Controllable Face Generation via Conditional Adversarial Latent Autoencoder (ALAE)
 
@@ -10,7 +12,9 @@ The work has been done as the Deep Learning Course final project "*Controllable 
 
 ## Info
 
+<center>
 ![alt-text-6](demo/talking-heads-transfer.png "talking-heads-transfer")
+</center>
 
 This master branch contains the solution for facial keypoints transfer (chech another branches for other types of conditions and approaches) based on publicly available pretrained generative model Adversarial Latent Autoencoder (ALAE, https://github.com/podgorskiy/ALAE). The solution is simple and just manipulates the latent codes of images by a small mapping MLP network. Generally, the whole pose-transfer architecture is trained adversarially with a special MLP critic network just on the latent codes of ALAE.
 
@@ -18,7 +22,9 @@ It is worth to mention, that ALAE has a huge identity gap during real image rest
 
 ## Reproducibility
 
+<center>
 ![alt-text-7](demo/talking-heads.png "talking-heads-inference")
+</center>
 
 ### Inference and training
 
