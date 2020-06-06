@@ -1,6 +1,10 @@
-|   |![alt-text-2](demo/source_0.png "source")|![alt-text-4](demo/source_1.png "source")|
-|:-:|:-:|:-:|
-|![alt-text-1](demo/target.gif "target")|![alt-text-3](demo/result_0.gif "result")|![alt-text-5](demo/result_1.gif "result")|
+<center>
+
+    |   |![alt-text-2](demo/source_0.png "source")|![alt-text-4](demo/source_1.png "source")|
+    |:-:|:-:|:-:|
+    |![alt-text-1](demo/target.gif "target")|![alt-text-3](demo/result_0.gif "result")|![alt-text-5](demo/result_1.gif "result")|
+
+</center>
 
 # Controllable Face Generation via Conditional Adversarial Latent Autoencoder (ALAE)
 
