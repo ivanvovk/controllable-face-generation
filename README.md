@@ -22,7 +22,7 @@ It is worth to mention, that ALAE has a huge identity gap during real image rest
 
 ### Inference and training
 
-First of all, make sure you have installed all the python packages by `pip install -r requirements.txt`. To try the solution we prepared `notebooks` folder, where we provided finetunning and inferene codes.
+First of all, make sure you have installed all the python packages by `pip install -r requirements.txt`. To try the solution we prepared `notebooks` folder, where we provided finetunning and inference codes.
 
 Single face finetunning is done in the notebook `notebooks/one_guy_finetunning.ipynb`. To train the facial keypoints transfer model you should set params in and run the bash file `sh train_talking_heads.sh`.
 
