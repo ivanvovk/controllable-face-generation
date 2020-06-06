@@ -14,7 +14,7 @@ We implemented our own ALAE model, but stopped training at 64x64 resolution due 
 
 ### Inference and training
 
-Training code is available in `train_ala.ipynb` notebook.
+Training code is available in `train_alae.ipynb` notebook.
 
 ### Data
 
