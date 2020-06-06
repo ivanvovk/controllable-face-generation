@@ -1,6 +1,6 @@
-|   |![alt-text-2](demo/source_0.png "Source")|![alt-text-4](demo/source_1.png "Source")|
+|   |![alt-text-2](demo/source_0.png "source")|![alt-text-4](demo/source_1.png "source")|
 |:-:|:-:|:-:|
-|![alt-text-1](demo/target.gif "Target")|![alt-text-3](demo/result_0.gif "Result")|![alt-text-5](demo/result_1.gif "Result")|
+|![alt-text-1](demo/target.gif "target")|![alt-text-3](demo/result_0.gif "result")|![alt-text-5](demo/result_1.gif "result")|
 
 # Controllable Face Generation via Conditional Adversarial Latent Autoencoder (ALAE)
 
@@ -10,11 +10,15 @@ The work has been done as the Deep Learning Course final project "*Controllable 
 
 ## Info
 
+![alt-text-6](demo/talking-heads-transfer.png "talking-heads-transfer")
+
 This master branch contains the solution for facial keypoints transfer (chech another branches for other types of conditions and approaches) based on publicly available pretrained generative model Adversarial Latent Autoencoder (ALAE, https://github.com/podgorskiy/ALAE). The solution is simple and just manipulates the latent codes of images by a small mapping MLP network. Generally, the whole pose-transfer architecture is trained adversarially with a special MLP critic network just on the latent codes of ALAE.
 
 It is worth to mention, that ALAE has a huge identity gap during real image restoration. So if you encode the image and then decode it with the generator, than you'll get a similar high-end quality picture, but the human identity will be not the same. In order to overcome it, we parametrically finetune ALAE's generator on a new face using perceptual VGG19 loss.
 
 ## Reproducibility
+
+![alt-text-7](demo/talking-heads.png "talking-heads-inference")
 
 ### Inference and training
 
