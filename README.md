@@ -6,7 +6,7 @@
 
 **Authors**: Grigorii Sotnikov, Vladimir Gogoryan, Dmitry Smorchkov and Ivan Vovk (all have equal contribution)
 
-The work has been done as the Deep Learning Course final project "Controllable Face Generation via Conditional Latent Models" at Skoltech. You can check the report and details in `demo/paper.pdf`.
+The work has been done as the Deep Learning Course final project "*Controllable Face Generation via Conditional Latent Models*" at Skoltech. You can check the report and details in `demo/paper.pdf`.
 
 ## Info
 
