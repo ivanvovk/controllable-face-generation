@@ -12,6 +12,8 @@ this paper, we propose a regularization procedure which encourages interpolated 
 
 ## Results
 
+Our results of interpolation between latent codes of images sized to `64x64` on `CelebA` by `ACAI` trained with combination of `MSE` and `Perceptual Loss`.
+
 ![alt text](https://github.com/ivanvovk/controllable-face-generation/blob/ACAI/results/acai_interpolation.png)
 
 ### Inference and training
