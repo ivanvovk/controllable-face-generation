@@ -1,0 +1,9 @@
+{
+    'emb_path': 'models/Embedding_CelebA64.pth'
+    'features': ['Black_Hair', 'Blond_Hair'],
+    'hidden_size': 128,
+    'learning_rate': 1e-4,
+    'betas': [0, 0.99],
+    'num_epochs': 100,
+    'loss_type': 'hinge'
+}
