@@ -12,7 +12,7 @@ this paper, we propose a regularization procedure which encourages interpolated 
 
 ## Results
 
-
+![alt text](https://github.com/ivanvovk/controllable-face-generation/blob/ACAI/results/acai_interpolation.png)
 
 ### Inference and training
 
