@@ -1,4 +1,4 @@
-# Controllable Face Generation via Conditional Adversarial Latent Autoencoder (ALAE)
+# Adversarial Latent Autoencoder (ALAE) Implementation
 
 **Authors**: Grigorii Sotnikov, Vladimir Gogoryan, Dmitry Smorchkov and Ivan Vovk (all have equal contribution)
 
