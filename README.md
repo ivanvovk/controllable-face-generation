@@ -8,6 +8,8 @@
 
 The work has been done as the Deep Learning Course final project "*Controllable Face Generation via Conditional Latent Models*" at Skoltech. You can check the report and details in `demo/paper.pdf`.
 
+Checkout our video presentation on YouTube: [link](https://youtu.be/af2zd35FlGs). 
+
 ## Info
 
 ![alt-text-6](demo/talking-heads-transfer.png "talking-heads-transfer")
